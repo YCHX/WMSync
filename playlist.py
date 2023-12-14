@@ -3,6 +3,7 @@ import shutil
 import argparse
 import unicodedata
 from tqdm import tqdm
+import json
 
 def read_m3u_playlist(file_path):
     with open(file_path, 'r') as file:
@@ -91,10 +92,12 @@ def main():
     args = parser.parse_args()
     playlist_names = args.playlist_name
 
-    music_library_path = '/Users/alvin/Library/RoonMounts/RoonStorage_0c6bb877af2e490f8941fe38db940a9ba30a2572/Music Section'
+    with open('config.json', 'r') as config_file:
+        config = json.load(config_file)
+        music_library_path = config['music_library']
     sdcard_path = os.getcwd()
     
-    playlist_folder = '/Users/alvin/Library/RoonMounts/RoonStorage_0c6bb877af2e490f8941fe38db940a9ba30a2572/Music Section/Playlists'
+    playlist_folder = os.path.join(music_library_path, 'Playlists')
 
     confirmation_sdcard = input(f"Will transfer music into {sdcard_path}, are you sure? (y/n): ")
     if confirmation_sdcard.lower() in ["y", "yes"] :

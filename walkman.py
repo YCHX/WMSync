@@ -6,6 +6,7 @@ from tqdm import tqdm
 import ipaddress
 from asyncio import run
 import subprocess
+import json
 
 # from adb_shell.adb_device_async import AdbDeviceTcpAsync
 # from adb_shell.auth.sign_pythonrsa import PythonRSASigner
@@ -129,10 +130,11 @@ async def main():
     # if not is_valid_ip(android_ip):
     #     raise ValueError("Invalid IP address")
 
-    music_library_path = '/Users/alvin/Library/RoonMounts/RoonStorage_0c6bb877af2e490f8941fe38db940a9ba30a2572/Music Section'
-    # sdcard_path = os.getcwd()
+    with open('config.json', 'r') as config_file:
+        config = json.load(config_file)
+        music_library_path = config['music_library']    # sdcard_path = os.getcwd()
     
-    playlist_folder = '/Users/alvin/Library/RoonMounts/RoonStorage_0c6bb877af2e490f8941fe38db940a9ba30a2572/Music Section/Playlists'
+    playlist_folder = os.path.join(music_library_path, 'Playlists')
 
     # adbkey = '/Users/alvin/.android/adbkey'
     # with open(adbkey) as f:
