@@ -1,3 +1,4 @@
 .adbkey*
 .DS_Store
 config.json
+__pycache__
